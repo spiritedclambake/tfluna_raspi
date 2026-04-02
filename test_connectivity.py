@@ -45,7 +45,7 @@ def read_tfluna_data():
                 temperature = (temperature/8.0) - 256.0 # temp scaling and offset
                 return distance/100.0,strength,temperature
 
-def determine_change(distance, past_distance):
+def determine_change(distance, past_distance, lastmeow):
     # 
     change = distance - past_distance
     if abs(change) > 0.5 and abs(lastmeow-time.time()) > refractoryperiod: # if the change is greater than 0.5 m, print a message
@@ -71,7 +71,7 @@ try:
         #            format(distance,strength,temperature)) # print sample data
         
         # we want to characterize what has changed, and do something different if it's changed a lot
-        determine_change(distance, past_distance)
+        determine_change(distance, past_distance, lastmeow)
         past_distance = distance # update past distance for next comparison
         
         time.sleep(100/1000)
