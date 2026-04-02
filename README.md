@@ -9,5 +9,5 @@ captures distance from a sculpture using time-of-flight LIDAR (sensor = tfluna).
 
 ## dev log
 ### 040226
-controller is sensitive to input, and this can cause issues with program connectivity
+appears to be sensitivty when connected with a USB-C adapter, and this can cause issues with serial connectivity 
 
