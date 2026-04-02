@@ -56,6 +56,7 @@ def determine_change(distance, past_distance, lastmeow):
             lastmeow = time.time() # update last meow time
         else: 
             print("no double meowing >:( last meow was {0:2.2f} seconds ago".format(time.time()-lastmeow))
+    return lastmeow
 
 def play_sound(audiofile):
 # run terminal command aplay
@@ -74,7 +75,7 @@ try:
         #            format(distance,strength,temperature)) # print sample data
         
         # we want to characterize what has changed, and do something different if it's changed a lot
-        determine_change(distance, past_distance, lastmeow)
+        lastmeow = determine_change(distance, past_distance, lastmeow)
         past_distance = distance # update past distance for next comparison
         
         time.sleep(100/1000)
