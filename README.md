@@ -4,8 +4,8 @@ captures distance from a sculpture using time-of-flight LIDAR (sensor = tfluna).
 
 ## gear
 
-raspberry pi 4 model 
-![TF luna sensor](https://en.benewake.com/TFLuna/index.html)
+- raspberry pi 4 model 
+- ![TF luna sensor](https://en.benewake.com/TFLuna/index.html)
 
 ## dev log
 ### 040226
