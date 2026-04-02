@@ -22,7 +22,9 @@ import subprocess
 ser = serial.Serial("/dev/serial0", 115200,timeout=0) # mini UART serial device
 
 past_distance = 0.0 
+lastmeow = time.time()
 audiofile = "meow.wav" # local audio file
+refractoryperiod = 500/1000 # 500 ms refractory period
 
 #
 ############################
@@ -46,10 +48,11 @@ def read_tfluna_data():
 def determine_change(distance, past_distance):
     # 
     change = distance - past_distance
-    if abs(change) > 0.5: # if the change is greater than 0.5 m, print a message
+    if abs(change) > 0.5 and abs(lastmeow-time.time()) > refractoryperiod: # if the change is greater than 0.5 m, print a message
         # play a wave file
         play_sound(audiofile)
         print("BIG change detected: {0:2.2f} m".format(change))
+        lastmeow = time.time() # update last meow time
 
 def play_sound(audiofile):
 # run terminal command aplay
