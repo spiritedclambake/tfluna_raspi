@@ -22,7 +22,7 @@ import subprocess
 ser = serial.Serial("/dev/serial0", 115200,timeout=0) # mini UART serial device
 
 past_distance = 0.0 
-audiofile = "meow.wav"
+audiofile = "meow.wav" # local audio file
 
 #
 ############################
@@ -52,9 +52,9 @@ def determine_change(distance, past_distance):
         print("BIG change detected: {0:2.2f} m".format(change))
 
 def play_sound(audiofile):
+    # run terminal command aplay
     process = subprocess.Popen([
         "/usr/bin/aplay", 
-        "--device=plughw:2,0", 
         str(path)
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
