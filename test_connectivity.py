@@ -10,9 +10,10 @@
 #
 ######################################################
 #
+from os import path
 import serial,time
 import numpy as np
-from playsound3 import playsound
+import subprocess
 #
 ##########################
 # TFLuna Lidar
@@ -21,7 +22,7 @@ from playsound3 import playsound
 ser = serial.Serial("/dev/serial0", 115200,timeout=0) # mini UART serial device
 
 past_distance = 0.0 
-audiofile = "invaders.wav"
+audiofile = "meow.wav"
 
 #
 ############################
@@ -47,8 +48,15 @@ def determine_change(distance, past_distance):
     change = distance - past_distance
     if abs(change) > 0.5: # if the change is greater than 0.5 m, print a message
         # play a wave file
-        playsound(audiofile)
+        play_sound(audiofile)
         print("BIG change detected: {0:2.2f} m".format(change))
+
+def play_sound(audiofile):
+    process = subprocess.Popen([
+        "/usr/bin/aplay", 
+        "--device=plughw:2,0", 
+        str(path)
+    ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 try:
     while True:
