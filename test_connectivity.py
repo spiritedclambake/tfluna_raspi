@@ -36,6 +36,8 @@ def read_tfluna_data():
                 temperature = (temperature/8.0) - 256.0 # temp scaling and offset
                 return distance/100.0,strength,temperature
 
+
+
 try:
     while True:
         if ser.isOpen() == False:
@@ -44,7 +46,6 @@ try:
         distance,strength,temperature = read_tfluna_data() # read values
         print('Distance: {0:2.2f} m, Strength: {1:2.0f} / 65535 (16-bit), Chip Temperature: {2:2.1f} C'.\
                     format(distance,strength,temperature)) # print sample data
-        ser.close() # close serial port
         time.sleep(1)
 except KeyboardInterrupt:
     ser.close() # close serial port on exit
