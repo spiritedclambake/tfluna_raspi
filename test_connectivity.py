@@ -17,6 +17,8 @@ import numpy as np
 ##########################
 #
 ser = serial.Serial("/dev/serial0", 115200,timeout=0) # mini UART serial device
+
+past_distance = 0.0 
 #
 ############################
 # read ToF data from TF-Luna
@@ -36,7 +38,10 @@ def read_tfluna_data():
                 temperature = (temperature/8.0) - 256.0 # temp scaling and offset
                 return distance/100.0,strength,temperature
 
-
+def determine_change(distance, past_distance):
+    change = distance - past_distance
+    if abs(change) > 0.5: # if the change is greater than 0.5 m, print a message
+        print("BIG change detected: {0:2.2f} m".format(change))
 
 try:
     while True:
@@ -46,6 +51,11 @@ try:
         distance,strength,temperature = read_tfluna_data() # read values
         print('Distance: {0:2.2f} m, Strength: {1:2.0f} / 65535 (16-bit), Chip Temperature: {2:2.1f} C'.\
                     format(distance,strength,temperature)) # print sample data
+        
+        # we want to characterize what has changed, and do something different if it's changed a lot
+        determine_change(distance, past_distance)
+        past_distance = distance # update past distance for next comparison
+        
         time.sleep(1)
 except KeyboardInterrupt:
     ser.close() # close serial port on exit
