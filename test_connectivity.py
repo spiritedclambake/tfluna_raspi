@@ -52,10 +52,10 @@ def determine_change(distance, past_distance):
         print("BIG change detected: {0:2.2f} m".format(change))
 
 def play_sound(audiofile):
-    # run terminal command aplay
+# run terminal command aplay
     process = subprocess.Popen([
         "/usr/bin/aplay", 
-        str(path)
+        audiofile
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 try:
