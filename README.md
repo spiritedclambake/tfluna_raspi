@@ -13,5 +13,8 @@ captures distance from a sculpture using time-of-flight LIDAR (sensor = tfluna).
 
 ## dev log
 ### 040226
-appears to be sensitivty when connected with a USB-C adapter, and this can cause issues with serial connectivity 
+- appears to be sensitivty when connected with a USB-C adapter, and this can cause issues with serial connectivity 
+- j got networking working so we can dev via `ssh cat@catolith.local`
+- after trying to get `playsound` working and subsequently a ton of dependencies, switched to using `aplay` via `subprocess`
+- increased "refresh rate" and removed terminal output to allow for better meowing speed, but probably need to figure out what is actually happening from a b/w perspective because it's hanging a lot
 
