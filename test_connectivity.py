@@ -12,6 +12,7 @@
 #
 import serial,time
 import numpy as np
+from playsound3 import playsound
 #
 ##########################
 # TFLuna Lidar
@@ -20,6 +21,8 @@ import numpy as np
 ser = serial.Serial("/dev/serial0", 115200,timeout=0) # mini UART serial device
 
 past_distance = 0.0 
+audiofile = "invaders.wav"
+
 #
 ############################
 # read ToF data from TF-Luna
@@ -40,8 +43,11 @@ def read_tfluna_data():
                 return distance/100.0,strength,temperature
 
 def determine_change(distance, past_distance):
+    # 
     change = distance - past_distance
     if abs(change) > 0.5: # if the change is greater than 0.5 m, print a message
+        # play a wave file
+        playsound(audiofile)
         print("BIG change detected: {0:2.2f} m".format(change))
 
 try:
