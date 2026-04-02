@@ -1,20 +1,27 @@
 ## overview
 
-captures distance from a sculpture using time-of-flight LIDAR (sensor = tfluna). plays different audio samples conditional upon the distance.
+detects occluded distance from a sculpture using time-of-flight LIDAR. 
+
+plays different audio samples conditional upon distance.
 
 ## gear
 
-- raspberry pi 4 model 
-- ![TF luna sensor](https://en.benewake.com/TFLuna/index.html)
+- Raspberry PI 4 model B
+- [TF luna sensor](https://en.benewake.com/TFLuna/index.html)
 
 ## setup
-
-`ssh cat@catolith01.local`
+### hardware
+- connect tfluna sensor to raspberry pi  
+- ensure the pi is connected to internet
+### run from terminal
+```
+ssh cat@catolith01.local
+python3 detect_distance.py
+```
 
 ## dev log
-### 040226
-- appears to be sensitivty when connected with a USB-C adapter, and this can cause issues with serial connectivity 
-- j got networking working so we can dev via `ssh cat@catolith.local`
+### 04/02/26
+- serial connectivity issues -- appears to drop after awhile when connected via USB-C adapter
+- k no more conn issues now that it's wireless -- j got networking working so we can dev via `ssh cat@catolith.local`
 - after trying to get `playsound` working and subsequently a ton of dependencies, switched to using `aplay` via `subprocess`
-- increased "refresh rate" and removed terminal output to allow for better meowing speed, but probably need to figure out what is actually happening from a b/w perspective because it's hanging a lot
-
+- increased sampling rate and removed terminal output to allow for better sensor reactivity
