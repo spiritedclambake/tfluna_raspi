@@ -12,7 +12,7 @@
 #
 import serial,time
 import numpy as np
-from playsound import playsound
+from playsound3 import playsound
 #
 ##########################
 # TFLuna Lidar
