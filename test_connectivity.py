@@ -48,11 +48,14 @@ def read_tfluna_data():
 def determine_change(distance, past_distance, lastmeow):
     # 
     change = distance - past_distance
-    if abs(change) > 0.5 and abs(lastmeow-time.time()) > refractoryperiod: # if the change is greater than 0.5 m, print a message
-        # play a wave file
-        play_sound(audiofile)
-        print("BIG change detected: {0:2.2f} m".format(change))
-        lastmeow = time.time() # update last meow time
+    if abs(change) > 0.5: # if the change is greater than 0.5 m, print a message
+        if abs(lastmeow-time.time()) > refractoryperiod:
+            # play a wave file
+            play_sound(audiofile)
+            print("BIG change detected: {0:2.2f} m".format(change))
+            lastmeow = time.time() # update last meow time
+        else: 
+            print("no double meowing >:( last meow was {0:2.2f} seconds ago".format(time.time()-lastmeow))
 
 def play_sound(audiofile):
 # run terminal command aplay
