@@ -64,14 +64,14 @@ try:
             ser.open() # open serial port if not open
 
         distance,strength,temperature = read_tfluna_data() # read values
-        print('Distance: {0:2.2f} m, Strength: {1:2.0f} / 65535 (16-bit), Chip Temperature: {2:2.1f} C'.\
-                    format(distance,strength,temperature)) # print sample data
+        #print('Distance: {0:2.2f} m, Strength: {1:2.0f} / 65535 (16-bit), Chip Temperature: {2:2.1f} C'.\
+        #            format(distance,strength,temperature)) # print sample data
         
         # we want to characterize what has changed, and do something different if it's changed a lot
         determine_change(distance, past_distance)
         past_distance = distance # update past distance for next comparison
         
-        time.sleep(1)
+        time.sleep(100/1000)
 except KeyboardInterrupt:
     ser.close() # close serial port on exit
     print("User interrupt; program exited.")
