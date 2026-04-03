@@ -1,12 +1,7 @@
 ######################################################
-# Copyright (c) 2021 Maker Portal LLC
-# Author: Joshua Hrisko
-# junes test change
-######################################################
 #
 # TF-Luna Mini LiDAR wired to a Raspberry Pi via UART
-# --- testing the distance measurement from the TF-Luna
-#
+# --- distance measurement from the TF-Luna
 #
 ######################################################
 #
